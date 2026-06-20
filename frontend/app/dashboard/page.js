@@ -93,7 +93,7 @@ export default function DashboardPage() {
 
   if (!ready || (ready && !user)) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-ink-text-muted">
+      <div className="min-h-screen flex items-center justify-center text-text-muted">
         Checking your session…
       </div>
     );
@@ -102,14 +102,14 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-1 max-w-6xl w-full mx-auto px-6 py-10 grid lg:grid-cols-[280px_1fr] gap-8">
+      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-10 grid lg:grid-cols-[280px_1fr] gap-8">
         {/* Sidebar */}
         <aside>
-          <h2 className="text-[11px] uppercase tracking-[0.2em] text-ink-text-muted mb-3">
+          <h2 className="text-[11px] uppercase tracking-[0.2em] text-text-faint mb-3">
             Your trips
           </h2>
           {loadingTrips ? (
-            <p className="text-sm text-ink-text-muted">Loading…</p>
+            <p className="text-sm text-text-muted">Loading…</p>
           ) : (
             <TripList trips={trips} selectedId={selected?._id} onSelect={setSelected} onNew={() => setShowForm(true)} />
           )}
@@ -118,7 +118,7 @@ export default function DashboardPage() {
         {/* Main panel */}
         <section>
           {error && (
-            <p className="mb-4 text-sm text-bad bg-bad/10 border border-bad/30 rounded-md px-3 py-2">{error}</p>
+            <p className="mb-4 text-sm text-bad bg-bad/10 border border-bad/30 rounded-xl px-3 py-2">{error}</p>
           )}
 
           {showForm && (
@@ -128,14 +128,14 @@ export default function DashboardPage() {
           )}
 
           {!showForm && !selected && !loadingTrips && (
-            <div className="rounded-xl border border-dashed border-ink-line p-10 text-center">
-              <p className="font-display text-xl text-ink-text mb-2">No trip selected yet</p>
-              <p className="text-sm text-ink-text-muted mb-5">
+            <div className="glass !border-dashed p-10 text-center">
+              <p className="font-display text-xl font-semibold text-text mb-2">No trip selected yet</p>
+              <p className="text-sm text-text-muted mb-5">
                 Create your first itinerary and the agent will draft the rest.
               </p>
               <button
                 onClick={() => setShowForm(true)}
-                className="px-4 py-2 rounded-md bg-brass text-ink font-medium hover:bg-brass-strong transition"
+                className="btn-pill btn-pill-primary"
               >
                 + New trip
               </button>
@@ -146,13 +146,13 @@ export default function DashboardPage() {
             <div className="space-y-8">
               <div className="flex items-start justify-between gap-4 flex-wrap">
                 <div>
-                  <h1 className="font-display text-3xl text-ink-text">{selected.destination}</h1>
-                  <p className="text-sm text-ink-text-muted font-mono-num mt-1">
+                  <h1 className="font-display text-3xl font-semibold text-text">{selected.destination}</h1>
+                  <p className="text-sm text-text-muted mt-1">
                     {selected.durationDays} days · {selected.budgetTier} budget
                     {selected.interests?.length > 0 && ` · ${selected.interests.join(', ')}`}
                   </p>
                   {selected.generationSource === 'mock' && (
-                    <p className="text-xs text-brass-strong mt-2">
+                    <p className="text-xs text-accent-strong mt-2">
                       Generated in demo mode (no Gemini API key configured) — sample data, not a live AI call.
                     </p>
                   )}
@@ -160,14 +160,14 @@ export default function DashboardPage() {
                 <button
                   onClick={handleDeleteTrip}
                   disabled={deleting}
-                  className="text-xs text-ink-text-muted hover:text-bad transition disabled:opacity-60"
+                  className="text-xs text-text-muted hover:text-bad transition disabled:opacity-60"
                 >
                   {deleting ? 'Deleting…' : 'Delete trip'}
                 </button>
               </div>
 
               <div className="grid lg:grid-cols-[1fr_300px] gap-8">
-                <div className="space-y-8">
+                <div className="space-y-6">
                   {selected.itinerary.map((day) => (
                     <DayCard
                       key={day.dayNumber}

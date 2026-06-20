@@ -32,21 +32,20 @@ export default function TripForm({ onSubmit, onCancel, submitting }) {
   }
 
   return (
-    <div className="ticket overflow-hidden">
-      <div className="ticket-stripe" />
-      <form onSubmit={handleSubmit} className="p-6">
-        <p className="text-[11px] uppercase tracking-[0.2em] text-paper-text-muted mb-1">
+    <div className="glass p-6">
+      <form onSubmit={handleSubmit}>
+        <p className="text-[11px] uppercase tracking-[0.2em] text-text-faint mb-1">
           New itinerary request
         </p>
-        <h2 className="font-display text-xl mb-5">Where to?</h2>
+        <h2 className="font-display text-xl font-semibold text-text mb-5">Where to?</h2>
 
         {error && (
-          <p className="mb-4 text-sm text-airmail-red bg-airmail-red/10 border border-airmail-red/30 rounded-md px-3 py-2">
+          <p className="mb-4 text-sm text-bad bg-bad/10 border border-bad/30 rounded-xl px-3 py-2">
             {error}
           </p>
         )}
 
-        <label className="block text-xs uppercase tracking-wide text-paper-text-muted mb-1" htmlFor="destination">
+        <label className="block text-xs uppercase tracking-wide text-text-faint mb-1.5" htmlFor="destination">
           Destination
         </label>
         <input
@@ -55,13 +54,13 @@ export default function TripForm({ onSubmit, onCancel, submitting }) {
           required
           value={destination}
           onChange={(e) => setDestination(e.target.value)}
-          placeholder="Kyoto, Japan"
-          className="w-full mb-4 px-3 py-2 rounded-md border border-paper-line bg-white/40 text-paper-text focus:outline-none focus:border-airmail-blue"
+          placeholder="Goa, India"
+          className="glass-input w-full mb-4 px-4 py-2.5 outline-none"
         />
 
         <div className="grid grid-cols-2 gap-4 mb-4">
           <div>
-            <label className="block text-xs uppercase tracking-wide text-paper-text-muted mb-1" htmlFor="days">
+            <label className="block text-xs uppercase tracking-wide text-text-faint mb-1.5" htmlFor="days">
               Days
             </label>
             <input
@@ -72,27 +71,27 @@ export default function TripForm({ onSubmit, onCancel, submitting }) {
               required
               value={durationDays}
               onChange={(e) => setDurationDays(e.target.value)}
-              className="w-full px-3 py-2 rounded-md border border-paper-line bg-white/40 text-paper-text font-mono-num focus:outline-none focus:border-airmail-blue"
+              className="glass-input w-full px-4 py-2.5 outline-none font-mono-num"
             />
           </div>
           <div>
-            <label className="block text-xs uppercase tracking-wide text-paper-text-muted mb-1" htmlFor="budget">
+            <label className="block text-xs uppercase tracking-wide text-text-faint mb-1.5" htmlFor="budget">
               Budget
             </label>
             <select
               id="budget"
               value={budgetTier}
               onChange={(e) => setBudgetTier(e.target.value)}
-              className="w-full px-3 py-2 rounded-md border border-paper-line bg-white/40 text-paper-text focus:outline-none focus:border-airmail-blue"
+              className="glass-input w-full px-4 py-2.5 outline-none"
             >
-              <option value="Low">Low</option>
-              <option value="Medium">Medium</option>
-              <option value="High">High</option>
+              <option className="bg-[#2a1530]" value="Low">Low</option>
+              <option className="bg-[#2a1530]" value="Medium">Medium</option>
+              <option className="bg-[#2a1530]" value="High">High</option>
             </select>
           </div>
         </div>
 
-        <p className="block text-xs uppercase tracking-wide text-paper-text-muted mb-2">Interests</p>
+        <p className="block text-xs uppercase tracking-wide text-text-faint mb-2">Interests</p>
         <div className="flex flex-wrap gap-2 mb-6">
           {INTEREST_OPTIONS.map((interest) => {
             const active = interests.includes(interest);
@@ -102,11 +101,11 @@ export default function TripForm({ onSubmit, onCancel, submitting }) {
                 key={interest}
                 onClick={() => toggleInterest(interest)}
                 aria-pressed={active}
-                className={`text-sm px-3 py-1.5 rounded-full border transition ${
+                className={
                   active
-                    ? 'bg-ink text-paper border-ink'
-                    : 'border-paper-line text-paper-text-muted hover:border-airmail-blue'
-                }`}
+                    ? 'chip !bg-white/20 !border-accent-strong !text-text'
+                    : 'chip hover:border-glass-border-strong'
+                }
               >
                 {interest}
               </button>
@@ -118,14 +117,14 @@ export default function TripForm({ onSubmit, onCancel, submitting }) {
           <button
             type="submit"
             disabled={submitting}
-            className="flex-1 py-2.5 rounded-md bg-ink text-paper font-medium hover:bg-ink-raised transition disabled:opacity-60"
+            className="btn-pill btn-pill-primary flex-1 disabled:opacity-60"
           >
             {submitting ? 'Drafting itinerary…' : 'Generate itinerary'}
           </button>
           <button
             type="button"
             onClick={onCancel}
-            className="px-4 py-2.5 rounded-md border border-paper-line text-paper-text-muted hover:border-airmail-red transition"
+            className="btn-pill btn-pill-glass"
           >
             Cancel
           </button>

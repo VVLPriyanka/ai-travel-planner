@@ -5,13 +5,13 @@ export default function TripList({ trips, selectedId, onSelect, onNew }) {
     <div className="space-y-3">
       <button
         onClick={onNew}
-        className="w-full rounded-xl border border-dashed border-ink-line text-ink-text-muted hover:border-brass hover:text-brass-strong transition py-3 text-sm font-medium"
+        className="w-full rounded-2xl border border-dashed border-glass-border-strong text-text-muted hover:border-accent-strong hover:text-accent-strong transition py-3 text-sm font-semibold"
       >
         + New trip
       </button>
 
       {trips.length === 0 && (
-        <p className="text-sm text-ink-text-muted px-1 py-4">
+        <p className="text-sm text-text-muted px-1 py-4">
           No trips yet. Create your first itinerary to begin.
         </p>
       )}
@@ -23,14 +23,14 @@ export default function TripList({ trips, selectedId, onSelect, onNew }) {
             <li key={trip._id}>
               <button
                 onClick={() => onSelect(trip)}
-                className={`w-full text-left rounded-lg border px-4 py-3 transition ${
+                className={`w-full text-left rounded-2xl border px-4 py-3 transition ${
                   active
-                    ? 'bg-ink-raised border-brass'
-                    : 'border-ink-line hover:border-ink-text-muted'
+                    ? 'bg-white/12 border-accent-strong'
+                    : 'border-glass-border hover:border-glass-border-strong bg-white/[0.03]'
                 }`}
               >
-                <p className="font-display text-base truncate">{trip.destination}</p>
-                <p className="text-xs text-ink-text-muted font-mono-num mt-0.5">
+                <p className="font-display text-base font-semibold text-text truncate">{trip.destination}</p>
+                <p className="text-xs text-text-muted mt-0.5">
                   {trip.durationDays}d · {trip.budgetTier} budget
                 </p>
               </button>
