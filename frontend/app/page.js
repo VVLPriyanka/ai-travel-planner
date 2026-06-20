@@ -20,7 +20,7 @@ export default function Home() {
 
           <p className="text-text-muted text-lg max-w-xl mb-10">
             Tell it where, how long, and what you&apos;re into. Get a day-by-day
-            plan, a realistic budget in rupees, hotel picks, and a packing list
+            plan, a realistic budget in dollars, hotel picks, and a packing list
             tuned to the climate — all editable afterward.
           </p>
 
@@ -43,9 +43,9 @@ export default function Home() {
                 body: 'A structured plan with morning, afternoon, and evening activities — add, remove, or regenerate any single day.',
               },
               {
-                icon: '₹',
+                icon: '$',
                 title: 'Realistic budget',
-                body: 'Flights, stay, food, and activities estimated in rupees against your chosen budget tier, recalculated as you edit.',
+                body: 'Flights, stay, food, and activities estimated in dollars against your chosen budget tier, recalculated as you edit.',
               },
               {
                 icon: '🧳',

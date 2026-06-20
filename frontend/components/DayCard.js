@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { addActivity, removeActivity, regenerateDay } from '@/lib/api';
-import { formatINR } from '@/lib/format';
+import { formatUSD } from '@/lib/format';
 
 const TIME_OPTIONS = ['Morning', 'Afternoon', 'Evening'];
 
@@ -131,7 +131,7 @@ export default function DayCard({ day, trip, token, onTripUpdate }) {
             </div>
             <div className="flex items-center gap-3 shrink-0">
               <span className="font-mono-num text-sm text-text-muted">
-                {formatINR(act.estimatedCostUSD)}
+                {formatUSD(act.estimatedCostUSD)}
               </span>
               <button
                 onClick={() => handleRemove(act._id)}
@@ -168,7 +168,7 @@ export default function DayCard({ day, trip, token, onTripUpdate }) {
           min={0}
           value={newCost}
           onChange={(e) => setNewCost(e.target.value)}
-          placeholder="₹"
+          placeholder="$"
           className="glass-input w-20 px-2 py-1.5 text-sm font-mono-num outline-none"
         />
         <button

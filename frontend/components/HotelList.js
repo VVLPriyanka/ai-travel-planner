@@ -1,6 +1,6 @@
 'use client';
 
-import { formatINR } from '@/lib/format';
+import { formatUSD } from '@/lib/format';
 
 export default function HotelList({ hotels }) {
   if (!hotels || hotels.length === 0) return null;
@@ -18,7 +18,7 @@ export default function HotelList({ hotels }) {
               <p className="text-xs text-text-muted">{hotel.tier} · {hotel.rating}</p>
             </div>
             <span className="font-mono-num text-text whitespace-nowrap text-right">
-              {formatINR(hotel.estimatedCostNightUSD)}
+              {formatUSD(hotel.estimatedCostNightUSD)}
               <span className="block text-[10px] text-text-faint font-sans">/night</span>
             </span>
           </li>

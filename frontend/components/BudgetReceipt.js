@@ -1,6 +1,6 @@
 'use client';
 
-import { formatINR } from '@/lib/format';
+import { formatUSD } from '@/lib/format';
 
 const ROWS = [
   { key: 'transport', label: 'Transport' },
@@ -22,7 +22,7 @@ export default function BudgetReceipt({ budget }) {
           <div key={row.key} className="flex items-baseline text-sm">
             <dt className="text-text-muted">{row.label}</dt>
             <span className="leader" />
-            <dd className="font-mono-num text-text">{formatINR(budget[row.key])}</dd>
+            <dd className="font-mono-num text-text">{formatUSD(budget[row.key])}</dd>
           </div>
         ))}
       </dl>
@@ -30,7 +30,7 @@ export default function BudgetReceipt({ budget }) {
       <div className="flex items-baseline justify-between">
         <span className="font-display text-base font-semibold text-text">Total</span>
         <span className="font-mono-num text-xl font-semibold text-accent-strong">
-          {formatINR(budget.total)}
+          {formatUSD(budget.total)}
         </span>
       </div>
     </div>
