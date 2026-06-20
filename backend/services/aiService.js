@@ -80,12 +80,11 @@ async function callGemini(prompt) {
 // Mock data generators (no network calls — fast, free, deterministic-ish)
 // ---------------------------------------------------------------------
 
-// Daily rates in INR (₹), tuned per budget tier. These are deliberately
-// round, realistic-feeling numbers rather than a raw USD*83 conversion.
+// Daily rates in USD ($), tuned per budget tier.
 const BUDGET_DAILY_RATE = {
-  Low: { accommodation: 1500, food: 900, activities: 700, transport: 500 },
-  Medium: { accommodation: 4500, food: 2200, activities: 1800, transport: 1200 },
-  High: { accommodation: 12000, food: 5000, activities: 4500, transport: 2500 },
+  Low: { accommodation: 35, food: 20, activities: 15, transport: 10 },
+  Medium: { accommodation: 90, food: 45, activities: 35, transport: 20 },
+  High: { accommodation: 220, food: 90, activities: 80, transport: 40 },
 };
 
 const ACTIVITY_BANK = {
@@ -143,7 +142,7 @@ function buildMockItinerary({ destination, durationDays, budgetTier, interests }
   const accommodation = rate.accommodation * durationDays;
   const food = rate.food * durationDays;
   const activities = Math.round(rate.activities * 1.3 * durationDays);
-  const transport = rate.transport * durationDays + 9000; // flat flight/transit baseline (₹)
+  const transport = rate.transport * durationDays + 150; // flat flight/transit baseline ($)
   const total = accommodation + food + activities + transport;
 
   const hotels = [
@@ -219,11 +218,8 @@ Respond with ONLY a valid JSON object (no markdown, no commentary) matching exac
 }
 
 Each day must have 3-4 activities spread across Morning/Afternoon/Evening.
-Provide exactly ${durationDays} day entries. Despite the field name "estimatedCostUSD"
-(a legacy name in our schema), every cost value must be a realistic amount in
-Indian Rupees (INR/₹) — NOT US dollars — consistent with the ${budgetTier} budget
-tier and typical prices in ${destination}. For example, a mid-range hotel night
-might be ₹4,000-6,000, not $50.
+Provide exactly ${durationDays} day entries. Costs must be realistic USD estimates
+consistent with the ${budgetTier} budget tier and typical prices in ${destination}.
 The "total" must equal the sum of the other four budget fields.
 `.trim();
 
@@ -253,19 +249,19 @@ async function regenerateDay({ destination, budgetTier, interests, dayNumber, fe
           description: feedback
             ? `Updated per your request: "${feedback}".`
             : `A regenerated ${themeInterest.toLowerCase()} morning.`,
-          estimatedCostUSD: 600,
+          estimatedCostUSD: 25,
           timeOfDay: 'Morning',
         },
         {
           title: `${ACTIVITY_BANK[themeInterest][1] || ACTIVITY_BANK[themeInterest][0]} in ${destination}`,
           description: 'A relaxed afternoon block, adjusted to your feedback.',
-          estimatedCostUSD: 450,
+          estimatedCostUSD: 20,
           timeOfDay: 'Afternoon',
         },
         {
           title: `Evening in ${destination}`,
           description: 'Wind down with food and local atmosphere.',
-          estimatedCostUSD: 750,
+          estimatedCostUSD: 30,
           timeOfDay: 'Evening',
         },
       ],
@@ -288,8 +284,6 @@ Respond with ONLY a valid JSON object (no markdown, no commentary) matching exac
   ]
 }
 Provide 3-4 activities that directly reflect the traveler's feedback.
-Despite the field name "estimatedCostUSD" (legacy naming in our schema), every
-cost value must be a realistic amount in Indian Rupees (INR/₹), not US dollars.
 `.trim();
 
   try {
