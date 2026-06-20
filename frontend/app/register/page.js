@@ -41,21 +41,18 @@ export default function RegisterPage() {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-1 flex items-center justify-center px-6 py-16">
-        <div className="ticket w-full max-w-sm overflow-hidden">
-          <div className="ticket-stripe" />
-          <form onSubmit={handleSubmit} className="p-7">
-            <p className="text-[11px] uppercase tracking-[0.2em] text-paper-text-muted mb-1">
-              First time here
-            </p>
-            <h1 className="font-display text-2xl mb-6">Create your account</h1>
+        <div className="glass w-full max-w-sm p-8">
+          <p className="text-xs uppercase tracking-[0.2em] text-text-faint mb-1">First time here</p>
+          <h1 className="font-display text-2xl font-semibold text-text mb-6">Create your account</h1>
 
+          <form onSubmit={handleSubmit}>
             {error && (
-              <p className="mb-4 text-sm text-airmail-red bg-airmail-red/10 border border-airmail-red/30 rounded-md px-3 py-2">
+              <p className="mb-4 text-sm text-bad bg-bad/10 border border-bad/30 rounded-xl px-3 py-2">
                 {error}
               </p>
             )}
 
-            <label className="block text-xs uppercase tracking-wide text-paper-text-muted mb-1" htmlFor="name">
+            <label className="block text-xs uppercase tracking-wide text-text-faint mb-1.5" htmlFor="name">
               Name
             </label>
             <input
@@ -65,11 +62,11 @@ export default function RegisterPage() {
               autoComplete="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full mb-4 px-3 py-2 rounded-md border border-paper-line bg-white/40 text-paper-text focus:outline-none focus:border-airmail-blue"
+              className="glass-input w-full mb-4 px-4 py-2.5 outline-none"
               placeholder="Jordan Avery"
             />
 
-            <label className="block text-xs uppercase tracking-wide text-paper-text-muted mb-1" htmlFor="email">
+            <label className="block text-xs uppercase tracking-wide text-text-faint mb-1.5" htmlFor="email">
               Email
             </label>
             <input
@@ -79,11 +76,11 @@ export default function RegisterPage() {
               autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full mb-4 px-3 py-2 rounded-md border border-paper-line bg-white/40 text-paper-text focus:outline-none focus:border-airmail-blue"
+              className="glass-input w-full mb-4 px-4 py-2.5 outline-none"
               placeholder="you@example.com"
             />
 
-            <label className="block text-xs uppercase tracking-wide text-paper-text-muted mb-1" htmlFor="password">
+            <label className="block text-xs uppercase tracking-wide text-text-faint mb-1.5" htmlFor="password">
               Password
             </label>
             <input
@@ -93,22 +90,18 @@ export default function RegisterPage() {
               autoComplete="new-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full mb-1 px-3 py-2 rounded-md border border-paper-line bg-white/40 text-paper-text focus:outline-none focus:border-airmail-blue"
+              className="glass-input w-full mb-1 px-4 py-2.5 outline-none"
               placeholder="At least 6 characters"
             />
-            <p className="text-xs text-paper-text-muted mb-6">Minimum 6 characters.</p>
+            <p className="text-xs text-text-faint mb-6">Minimum 6 characters.</p>
 
-            <button
-              type="submit"
-              disabled={submitting}
-              className="w-full py-2.5 rounded-md bg-ink text-paper font-medium hover:bg-ink-raised transition disabled:opacity-60"
-            >
+            <button type="submit" disabled={submitting} className="btn-pill btn-pill-primary w-full disabled:opacity-60">
               {submitting ? 'Creating account…' : 'Create account'}
             </button>
 
-            <p className="text-sm text-paper-text-muted mt-5 text-center">
+            <p className="text-sm text-text-muted mt-5 text-center">
               Already have an account?{' '}
-              <Link href="/login" className="text-airmail-blue hover:underline">
+              <Link href="/login" className="text-accent-strong hover:underline">
                 Sign in
               </Link>
             </p>

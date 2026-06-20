@@ -7,108 +7,66 @@ export default function Home() {
       <Navbar />
 
       <main className="flex-1">
-        <section className="max-w-6xl mx-auto px-6 pt-16 pb-20 grid md:grid-cols-2 gap-12 items-center">
-          <div>
-            <p className="font-mono-num text-xs uppercase tracking-[0.3em] text-brass-strong mb-4">
-              Boarding Pass · Trip Generator
-            </p>
-            <h1 className="font-display text-4xl sm:text-5xl leading-tight text-ink-text mb-6">
-              Hand the planning to an agent.
-              <br />
-              <span className="text-brass-strong">Keep the souvenirs.</span>
-            </h1>
-            <p className="text-ink-text-muted text-lg mb-8 max-w-md">
-              Tell it where, how long, and what you&apos;re into. The agent drafts a
-              day-by-day itinerary, a realistic budget, hotel picks, and a packing
-              list tuned to the destination&apos;s climate — all editable afterward.
-            </p>
-            <div className="flex gap-4">
-              <Link
-                href="/register"
-                className="px-5 py-3 rounded-md bg-brass text-ink font-medium hover:bg-brass-strong transition"
-              >
-                Plan your first trip
-              </Link>
-              <Link
-                href="/login"
-                className="px-5 py-3 rounded-md border border-ink-line text-ink-text hover:border-brass transition"
-              >
-                Sign in
-              </Link>
-            </div>
-          </div>
+        <section className="max-w-4xl mx-auto px-6 pt-24 sm:pt-32 pb-24 text-center flex flex-col items-center">
+          <span className="badge-pill mb-7">
+            <span aria-hidden="true">✨</span> AI-Powered Trip Planning
+          </span>
 
-          {/* Hero ticket: a sample boarding pass illustrating the product */}
-          <div className="ticket overflow-hidden">
-            <div className="ticket-stripe" />
-            <div className="p-6">
-              <div className="flex justify-between items-start mb-4">
-                <div>
-                  <p className="text-[11px] uppercase tracking-[0.2em] text-paper-text-muted">Destination</p>
-                  <p className="font-display text-2xl">Lisbon, Portugal</p>
-                </div>
-                <div className="text-right">
-                  <p className="text-[11px] uppercase tracking-[0.2em] text-paper-text-muted">Duration</p>
-                  <p className="font-mono-num text-2xl">5d</p>
-                </div>
-              </div>
-              <div className="flex gap-2 mb-5">
-                {['Food', 'Culture', 'Adventure'].map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-[11px] uppercase tracking-wide px-2 py-1 rounded border border-paper-line text-paper-text-muted"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
+          <h1 className="font-display text-4xl sm:text-6xl font-semibold leading-[1.08] text-text mb-6 text-balance">
+            Your AI trip planner
+            <br />
+            with a real itinerary
+          </h1>
 
-              <div className="perforation mb-5" />
+          <p className="text-text-muted text-lg max-w-xl mb-10">
+            Tell it where, how long, and what you&apos;re into. Get a day-by-day
+            plan, a realistic budget in rupees, hotel picks, and a packing list
+            tuned to the climate — all editable afterward.
+          </p>
 
-              <p className="text-[11px] uppercase tracking-[0.2em] text-paper-text-muted mb-2">
-                Day 1 · Morning
-              </p>
-              <p className="font-display text-lg mb-1">Alfama walking tour</p>
-              <p className="text-sm text-paper-text-muted mb-4">
-                Wind through the oldest district, fado echoing from open doorways.
-              </p>
-
-              <div className="flex justify-between items-center text-sm font-mono-num">
-                <span className="text-paper-text-muted">Est. total budget</span>
-                <span className="leader-paper leader" />
-                <span className="text-lg">$1,180</span>
-              </div>
-            </div>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <Link href="/register" className="btn-pill btn-pill-primary !px-7 !py-3.5 text-base">
+              Plan your first trip
+            </Link>
+            <Link href="/login" className="btn-pill btn-pill-glass !px-7 !py-3.5 text-base">
+              Sign in
+            </Link>
           </div>
         </section>
 
-        <section className="max-w-6xl mx-auto px-6 pb-20">
+        <section className="max-w-5xl mx-auto px-6 pb-24">
           <div className="grid sm:grid-cols-3 gap-6">
             {[
               {
+                icon: '🗓️',
                 title: 'Day-by-day itinerary',
                 body: 'A structured plan with morning, afternoon, and evening activities — add, remove, or regenerate any single day.',
               },
               {
+                icon: '₹',
                 title: 'Realistic budget',
-                body: 'Flights, stay, food, and activities estimated against your chosen budget tier, recalculated as you edit.',
+                body: 'Flights, stay, food, and activities estimated in rupees against your chosen budget tier, recalculated as you edit.',
               },
               {
+                icon: '🧳',
                 title: 'Weather-aware packing',
-                body: 'A checklist built from your destination\u2019s climate and your planned activities — check items off as you pack.',
+                body: "A checklist built from your destination's climate and your planned activities — check items off as you pack.",
               },
             ].map((card) => (
-              <div key={card.title} className="rounded-xl border border-ink-line bg-ink-raised p-6">
-                <h3 className="font-display text-lg text-brass-strong mb-2">{card.title}</h3>
-                <p className="text-sm text-ink-text-muted">{card.body}</p>
+              <div key={card.title} className="glass p-6">
+                <div className="h-10 w-10 rounded-full bg-white/10 border border-glass-border flex items-center justify-center text-lg mb-4">
+                  {card.icon}
+                </div>
+                <h3 className="font-display text-lg font-semibold text-text mb-2">{card.title}</h3>
+                <p className="text-sm text-text-muted leading-relaxed">{card.body}</p>
               </div>
             ))}
           </div>
         </section>
       </main>
 
-      <footer className="border-t border-ink-line py-6">
-        <div className="max-w-6xl mx-auto px-6 text-xs text-ink-text-muted">
+      <footer className="px-6 py-8">
+        <div className="max-w-5xl mx-auto text-xs text-text-faint text-center">
           Built for the Trao Full Stack Engineering Assessment.
         </div>
       </footer>
