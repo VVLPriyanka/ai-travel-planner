@@ -4,7 +4,7 @@ const ActivitySchema = new mongoose.Schema(
   {
     title: { type: String, required: true, trim: true },
     description: { type: String, default: '', trim: true },
-    estimatedCostINR: { type: Number, default: 0, min: 0 },
+    estimatedCostUSD: { type: Number, default: 0, min: 0 },
     timeOfDay: {
       type: String,
       enum: ['Morning', 'Afternoon', 'Evening'],
@@ -27,7 +27,7 @@ const HotelSchema = new mongoose.Schema(
   {
     name: { type: String, required: true, trim: true },
     tier: { type: String, default: 'Mid Range', trim: true },
-    estimatedCostNightINR: { type: Number, default: 0, min: 0 },
+    estimatedCostNightUSD: { type: Number, default: 0, min: 0 },
     rating: { type: String, default: '4.0/5' },
     notes: { type: String, default: '' },
   },

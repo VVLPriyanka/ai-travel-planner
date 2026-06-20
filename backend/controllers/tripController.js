@@ -9,7 +9,7 @@ const VALID_TIME_OF_DAY = ['Morning', 'Afternoon', 'Evening'];
 /** Recomputes the "activities" and "total" budget fields from the live itinerary. */
 function recomputeBudget(trip) {
   const activitiesSum = trip.itinerary.reduce(
-    (sum, day) => sum + day.activities.reduce((s, a) => s + (a.estimatedCostINR || 0), 0),
+    (sum, day) => sum + day.activities.reduce((s, a) => s + (a.estimatedCostUSD || 0), 0),
     0
   );
   trip.estimatedBudget.activities = activitiesSum;
@@ -97,7 +97,7 @@ const deleteTrip = asyncHandler(async (req, res) => {
 // POST /api/trips/:id/activities — add a new activity to a specific day
 const addActivity = asyncHandler(async (req, res) => {
   const trip = await getOwnedTrip(req.params.id, req.user.id);
-  const { dayNumber, title, description, estimatedCostINR, timeOfDay } = req.body;
+  const { dayNumber, title, description, estimatedCostUSD, timeOfDay } = req.body;
 
   if (!dayNumber || !title) {
     throw new ApiError(400, 'dayNumber and title are required.');
@@ -114,7 +114,7 @@ const addActivity = asyncHandler(async (req, res) => {
   day.activities.push({
     title,
     description: description || '',
-    estimatedCostINR: Number(estimatedCostINR) || 0,
+    estimatedCostUSD: Number(estimatedCostUSD) || 0,
     timeOfDay: timeOfDay || 'Afternoon',
   });
 

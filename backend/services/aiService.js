@@ -121,19 +121,19 @@ function buildMockItinerary({ destination, durationDays, budgetTier, interests }
         {
           title: `${morningActivity} in ${destination}`,
           description: `A ${themeInterest.toLowerCase()}-focused start to day ${dayNumber}, suited to a ${budgetTier.toLowerCase()} budget.`,
-          estimatedCostINR: Math.round(rate.activities * 0.6),
+          estimatedCostUSD: Math.round(rate.activities * 0.6),
           timeOfDay: 'Morning',
         },
         {
           title: `Explore ${destination} city center`,
           description: 'Self-paced wandering, local shops, and people-watching.',
-          estimatedCostINR: Math.round(rate.activities * 0.2),
+          estimatedCostUSD: Math.round(rate.activities * 0.2),
           timeOfDay: 'Afternoon',
         },
         {
           title: `${eveningActivity} in ${destination}`,
           description: `An evening ${secondInterest.toLowerCase()} experience to close out day ${dayNumber}.`,
-          estimatedCostINR: Math.round(rate.activities * 0.5),
+          estimatedCostUSD: Math.round(rate.activities * 0.5),
           timeOfDay: 'Evening',
         },
       ],
@@ -150,21 +150,21 @@ function buildMockItinerary({ destination, durationDays, budgetTier, interests }
     {
       name: `${destination} Budget Stay`,
       tier: 'Budget Friendly',
-      estimatedCostNightINR: Math.round(rate.accommodation * 0.6),
+      estimatedCostNightUSD: Math.round(rate.accommodation * 0.6),
       rating: '4.0/5',
       notes: 'Clean, simple, well-located for getting around cheaply.',
     },
     {
       name: `${destination} Central Hotel`,
       tier: 'Mid Range',
-      estimatedCostNightINR: rate.accommodation,
+      estimatedCostNightUSD: rate.accommodation,
       rating: '4.4/5',
       notes: 'Good balance of comfort and price, central location.',
     },
     {
       name: `${destination} Grand Suites`,
       tier: 'Luxury',
-      estimatedCostNightINR: Math.round(rate.accommodation * 2.2),
+      estimatedCostNightUSD: Math.round(rate.accommodation * 2.2),
       rating: '4.8/5',
       notes: 'Premium amenities for travelers prioritizing comfort.',
     },
@@ -206,12 +206,12 @@ Respond with ONLY a valid JSON object (no markdown, no commentary) matching exac
       "dayNumber": 1,
       "theme": "short theme for the day",
       "activities": [
-        { "title": "string", "description": "string", "estimatedCostINR": number, "timeOfDay": "Morning" | "Afternoon" | "Evening" }
+        { "title": "string", "description": "string", "estimatedCostUSD": number, "timeOfDay": "Morning" | "Afternoon" | "Evening" }
       ]
     }
   ],
   "hotels": [
-    { "name": "string", "tier": "Budget Friendly" | "Mid Range" | "Luxury", "estimatedCostNightINR": number, "rating": "string like 4.5/5", "notes": "string" }
+    { "name": "string", "tier": "Budget Friendly" | "Mid Range" | "Luxury", "estimatedCostNightUSD": number, "rating": "string like 4.5/5", "notes": "string" }
   ],
   "estimatedBudget": {
     "transport": number, "accommodation": number, "food": number, "activities": number, "total": number
@@ -219,8 +219,11 @@ Respond with ONLY a valid JSON object (no markdown, no commentary) matching exac
 }
 
 Each day must have 3-4 activities spread across Morning/Afternoon/Evening.
-Provide exactly ${durationDays} day entries. Costs must be realistic INR (₹) estimates
-consistent with the ${budgetTier} budget tier and typical prices in ${destination}.
+Provide exactly ${durationDays} day entries. Despite the field name "estimatedCostUSD"
+(a legacy name in our schema), every cost value must be a realistic amount in
+Indian Rupees (INR/₹) — NOT US dollars — consistent with the ${budgetTier} budget
+tier and typical prices in ${destination}. For example, a mid-range hotel night
+might be ₹4,000-6,000, not $50.
 The "total" must equal the sum of the other four budget fields.
 `.trim();
 
@@ -250,19 +253,19 @@ async function regenerateDay({ destination, budgetTier, interests, dayNumber, fe
           description: feedback
             ? `Updated per your request: "${feedback}".`
             : `A regenerated ${themeInterest.toLowerCase()} morning.`,
-          estimatedCostINR: 600,
+          estimatedCostUSD: 600,
           timeOfDay: 'Morning',
         },
         {
           title: `${ACTIVITY_BANK[themeInterest][1] || ACTIVITY_BANK[themeInterest][0]} in ${destination}`,
           description: 'A relaxed afternoon block, adjusted to your feedback.',
-          estimatedCostINR: 450,
+          estimatedCostUSD: 450,
           timeOfDay: 'Afternoon',
         },
         {
           title: `Evening in ${destination}`,
           description: 'Wind down with food and local atmosphere.',
-          estimatedCostINR: 750,
+          estimatedCostUSD: 750,
           timeOfDay: 'Evening',
         },
       ],
@@ -281,10 +284,12 @@ Respond with ONLY a valid JSON object (no markdown, no commentary) matching exac
   "dayNumber": ${dayNumber},
   "theme": "short theme for the day",
   "activities": [
-    { "title": "string", "description": "string", "estimatedCostINR": number, "timeOfDay": "Morning" | "Afternoon" | "Evening" }
+    { "title": "string", "description": "string", "estimatedCostUSD": number, "timeOfDay": "Morning" | "Afternoon" | "Evening" }
   ]
 }
 Provide 3-4 activities that directly reflect the traveler's feedback.
+Despite the field name "estimatedCostUSD" (legacy naming in our schema), every
+cost value must be a realistic amount in Indian Rupees (INR/₹), not US dollars.
 `.trim();
 
   try {
