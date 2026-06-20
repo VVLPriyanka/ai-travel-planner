@@ -1,0 +1,155 @@
+@import "tailwindcss";
+
+/*
+  Design language: "Boarding Pass" — a deep ink-navy ground (the night
+  departure board) with paper-toned ticket cards as the signature
+  element, trimmed in a brass rule and an airmail stripe. Numbers that
+  matter (cost, day count, dates) are set in a monospace utility face,
+  the way they'd appear printed on a real ticket.
+*/
+
+:root {
+  --ink: #0f141c;          /* page background */
+  --ink-raised: #161d29;   /* panel background */
+  --ink-line: #283142;     /* hairline borders on dark surfaces */
+  --paper: #f3ecdc;        /* ticket / card background */
+  --paper-line: #d8cdae;   /* hairline borders on paper surfaces */
+  --ink-text: #e9e4d8;     /* primary text on dark */
+  --ink-text-muted: #99a3b5;
+  --paper-text: #211d14;   /* primary text on paper */
+  --paper-text-muted: #6b6450;
+  --brass: #c9a24b;        /* primary accent */
+  --brass-strong: #e3bd66;
+  --airmail-red: #c1443c;
+  --airmail-blue: #2f5d8a;
+  --good: #6fa287;
+  --bad: #d2685f;
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-raised: var(--ink-raised);
+  --color-ink-line: var(--ink-line);
+  --color-paper: var(--paper);
+  --color-paper-line: var(--paper-line);
+  --color-ink-text: var(--ink-text);
+  --color-ink-text-muted: var(--ink-text-muted);
+  --color-paper-text: var(--paper-text);
+  --color-paper-text-muted: var(--paper-text-muted);
+  --color-brass: var(--brass);
+  --color-brass-strong: var(--brass-strong);
+  --color-airmail-red: var(--airmail-red);
+  --color-airmail-blue: var(--airmail-blue);
+  --color-good: var(--good);
+  --color-bad: var(--bad);
+
+  --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--ink);
+  color: var(--ink-text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  letter-spacing: 0.01em;
+}
+
+.font-display { font-family: var(--font-display); }
+.font-mono-num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+/* Respect reduced-motion preference everywhere */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Visible keyboard focus on dark + paper surfaces alike */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--brass-strong);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* --- Signature element: the boarding-pass / ticket card --- */
+.ticket {
+  position: relative;
+  background: var(--paper);
+  color: var(--paper-text);
+  border-radius: 10px;
+  box-shadow: 0 12px 30px -14px rgba(0, 0, 0, 0.6);
+}
+
+/* The airmail stripe: a repeating red/blue diagonal hem along the top edge */
+.ticket-stripe {
+  height: 6px;
+  border-radius: 10px 10px 0 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--airmail-red) 0px,
+    var(--airmail-red) 10px,
+    var(--paper) 10px,
+    var(--paper) 14px,
+    var(--airmail-blue) 14px,
+    var(--airmail-blue) 24px,
+    var(--paper) 24px,
+    var(--paper) 28px
+  );
+}
+
+/* Perforation: a dashed tear line, used between a ticket body and its stub */
+.perforation {
+  position: relative;
+  border-top: 2px dashed var(--paper-line);
+  height: 0;
+}
+.perforation::before,
+.perforation::after {
+  content: "";
+  position: absolute;
+  top: -7px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--ink);
+}
+.perforation::before { left: -19px; }
+.perforation::after { right: -19px; }
+
+/* Receipt-style dotted leader between a label and a value */
+.leader {
+  flex: 1;
+  border-bottom: 1px dotted var(--ink-line);
+  margin: 0 8px;
+  height: 1px;
+  transform: translateY(-4px);
+}
+.leader-paper {
+  border-bottom: 1px dotted var(--paper-line);
+}
+
+.scrollbar-thin::-webkit-scrollbar { width: 8px; height: 8px; }
+.scrollbar-thin::-webkit-scrollbar-thumb { background: var(--ink-line); border-radius: 8px; }
+.scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
