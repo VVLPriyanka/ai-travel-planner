@@ -4,8 +4,6 @@ A multi-user web app that generates a day-by-day travel itinerary, budget estima
 hotel suggestions, and a climate-aware packing list using an LLM agent — with full
 authentication, per-user data isolation, and an editable itinerary.
 
-Built for the Trao Full Stack Engineering Assessment.
-
 ---
 
 ## 1. Project Overview
