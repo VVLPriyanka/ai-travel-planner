@@ -188,7 +188,7 @@ on destination + travel month — documented here rather than silently glossed o
 ### Prerequisites
 - Node.js 18+ and npm
 - A MongoDB connection string (local `mongod`, or a free [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register) cluster)
-- *(Optional)* a free [Gemini API key](https://aistudio.google.com/app/apikey) — the app runs in mock mode without one
+- A free [Gemini API key](https://aistudio.google.com/app/apikey) 
 
 ### Backend
 
