@@ -4,8 +4,6 @@ A multi-user web app that generates a day-by-day travel itinerary, budget estima
 hotel suggestions, and a climate-aware packing list using an LLM agent — with full
 authentication, per-user data isolation, and an editable itinerary.
 
-Built for the Trao Full Stack Engineering Assessment.
-
 ---
 
 ## 1. Project Overview
@@ -188,7 +186,7 @@ on destination + travel month — documented here rather than silently glossed o
 ### Prerequisites
 - Node.js 18+ and npm
 - A MongoDB connection string (local `mongod`, or a free [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register) cluster)
-- *(Optional)* a free [Gemini API key](https://aistudio.google.com/app/apikey) — the app runs in mock mode without one
+- A free [Gemini API key](https://aistudio.google.com/app/apikey) 
 
 ### Backend
 
