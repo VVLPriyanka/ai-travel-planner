@@ -1,4 +1,4 @@
-# Voyage Ledger — AI Travel Planner
+# Voyage — AI Travel Planner
 
 A multi-user web app that generates a day-by-day travel itinerary, budget estimate,
 hotel suggestions, and a climate-aware packing list using an LLM agent — with full
