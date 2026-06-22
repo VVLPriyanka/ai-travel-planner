@@ -9,7 +9,7 @@ export default function Home() {
       <main className="flex-1">
         <section className="max-w-4xl mx-auto px-6 pt-24 sm:pt-32 pb-24 text-center flex flex-col items-center">
           <span className="badge-pill mb-7">
-            <span aria-hidden="true">✨</span> AI-Powered Trip Planning
+            AI-Powered Trip Planning
           </span>
 
           <h1 className="font-display text-4xl sm:text-6xl font-semibold leading-[1.08] text-text mb-6 text-balance">
@@ -65,11 +65,6 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="px-6 py-8">
-        <div className="max-w-5xl mx-auto text-xs text-text-faint text-center">
-          Built for the Trao Full Stack Engineering Assessment.
-        </div>
-      </footer>
     </div>
   );
 }
